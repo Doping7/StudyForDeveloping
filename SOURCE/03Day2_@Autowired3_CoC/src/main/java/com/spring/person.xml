@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+<context:annotation-config></context:annotation-config>
+<bean id = "pet01" class = "com.spring.Cat">
+<constructor-arg name="catName" value = "뭉크"></constructor-arg>
+<constructor-arg name="catAge" value = "10"></constructor-arg>
+</bean>
+<bean id = "cat" class = "com.spring.Cat"><!-- byType으로 했을때 같은 것이 두개라 충돌나는 경우에 ByName의 형식으로 둘 중에 id가 동일한 객체를 선택한다. -->
+<constructor-arg name="catName" value = "야옹이"></constructor-arg>
+<constructor-arg name="catAge" value = "20"></constructor-arg>
+</bean>
+<bean id = "onePerson" class = "com.spring.Person">
+<property name="username" value ="홍길동"></property>
+<property name="age" value ="20"></property>
+</bean>
+</beans>

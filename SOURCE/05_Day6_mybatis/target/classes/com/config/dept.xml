@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+<!-- 필수  context, tx check-->
+<!-- 0. 어노테이션 활성화-->
+<context:annotation-config></context:annotation-config>
+<!--1. properties등록  -->
+<context:property-placeholder location="classpath:com/config/jdbc.properties"/>
+<!--  2. DataSource생성-->
+<bean id="myDataSource" class="org.apache.commons.dbcp2.BasicDataSource" destroy-method="close">
+	<property name="driverClassName" value="${jdbc.driver}"></property>
+	<property name="url" value="${jdbc.url}"></property>
+	<property name="username" value="${jdbc.userid}"></property>
+	<property name="password" value="${jdbc.passwd}"></property>
+</bean>
+<!-- 3. SqlSessonFactoryBean생성, mapper지정, alias지정  -->
+<bean id="mySqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean"> 
+	<property name="dataSource" ref="myDataSource"></property>
+	<property name="mapperLocations"><!--mapper설정 -->
+		<list>
+			<value>classpath:com/config/DeptMapper.xml</value>
+		</list>
+	</property>
+	<property name="typeAliases">
+		<list>
+			<value>com.dto.DeptDTO</value><!-- dto클래스에서 alias명 지정 @Alias('alias명')  -->
+		</list>
+	</property>
+</bean>
+<bean id = "mySqlSessionTemplate" class = "org.mybatis.spring.SqlSessionTemplate">
+<constructor-arg name = "sqlSessionFactory" ref = "mySqlSessionFactory"></constructor-arg>
+</bean>
+<bean id = "dao" class = "com.dao.DeptDAO">
+<property name="session" ref="mySqlSessionTemplate"></property>
+</bean>
+
+<bean id = "service" class = "com.service.DeptService">
+<property name="dao" ref="dao"></property>
+</bean>
+</beans>

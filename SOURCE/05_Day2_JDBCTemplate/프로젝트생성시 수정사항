@@ -1,0 +1,12 @@
+pom.xml
+1. spring버전수정
+<!-- Spring -->
+		<!-- Spring framework 버전 4.3.22로 수정 -->
+		<spring-framework.version>4.3.22.RELEASE</spring-framework.version>
+		
+2. complier 버전 수정	
+		  <configuration>
+	   <!-- complier 버전 1.8로 수정 -->
+	    <source>1.8</source>
+	    <target>1.8</target>
+	   </configuration>

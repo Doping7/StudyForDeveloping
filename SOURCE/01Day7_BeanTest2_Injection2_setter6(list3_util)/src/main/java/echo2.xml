@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	<bean id = "anotherBean1" class = "com.spring.AnotherBean">
+	<constructor-arg name="name" value = "test1"></constructor-arg>
+	</bean>
+	<bean id = "anotherBean2" class = "com.spring.AnotherBean">
+	<constructor-arg name="name" value = "test2"></constructor-arg>
+	</bean>
+	<bean id = "anotherBean3" class = "com.spring.AnotherBean">
+	<constructor-arg name="name" value = "test3"></constructor-arg>
+	</bean>
+	
+	<bean id="echoBean" class="com.spring.EchoBean">
+		<property name="valueList">
+			<list>
+				<ref bean = "anotherBean1"/>
+				<ref bean = "anotherBean2"/>
+				<ref bean = "anotherBean3"/>
+			</list>
+		</property>
+		<!-- <constructor-arg name = "anotherBean" ref = "anotherBean1"></constructor-arg> -->
+		<property name="anotherBean" ref = "anotherBean1"></property>
+	</bean>
+
+</beans>

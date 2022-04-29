@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+<import resource="animal.xml"/><!-- 다른 폴더에 있으면 해당 경로도 같이 입력해줘야한다. -->
+<bean id = "xxx" class = "com.spring.Person"></bean>
+
+</beans>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
+	<!-- 0. properties파일 받아오기 -->
+	<bean
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="location">
+			<value>classpath:db.properties</value>
+		</property>
+	</bean>
+	<!-- 1. data풀 객체 생성 -->
+	<bean id="dataSource"
+		class="org.apache.commons.dbcp2.BasicDataSource"
+		destroy-method="close">
+		<property name="driverClassName" value="${driver}"></property>
+		<property name="url" value="${url}"></property>
+		<property name="username" value="${username}"></property>
+		<property name="password" value="${password}"></property>
+	</bean>
+	<!-- 2. 트랜잭션 매니저 객체 생성 -->
+	<bean id="transactionManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource"></property>
+	</bean>
+	<!-- 3. 트랜잭션 처리 annotation 활성화 필요한 함수에서 @처리하기 -->
+	<tx:annotation-driven transaction-manager="transactionManager"/>
+	<!-- 여기까지 트랜잭션 처리 끝 -->
+	
+	
+	<!-- 4. jdbc 객체 생성 및 사용할 데이터리소스 넘겨주기 -->
+	<bean id = "jdbcTemplate" class = "org.springframework.jdbc.core.JdbcTemplate">
+	<property name="dataSource" ref = "dataSource"></property>
+	</bean>
+	
+	<!-- 5. 실제로 사용하고 필요한 bean 생성하기 -->
+	<bean id = "dao" class = "com.dao.ProductDAO">
+	<property name="jdbcTemplate" ref="jdbcTemplate"></property>
+	</bean>
+	
+	<bean id  = "service" class = "com.service.ProductService">
+	<property name="dao" ref="dao"></property>
+	</bean>
+</beans>

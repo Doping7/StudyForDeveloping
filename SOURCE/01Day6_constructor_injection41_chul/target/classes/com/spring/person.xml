@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+<bean id = "catBean" class = "com.spring.Cat">
+<constructor-arg name="catName" value = "야옹이"></constructor-arg>
+<constructor-arg name="catAge" value = "20"></constructor-arg>
+</bean>
+<bean id = "dogBean" class = "com.spring.Dog">
+<constructor-arg name="dogName" value = "멍멍이"></constructor-arg>
+<constructor-arg name="dogAge" value = "10"></constructor-arg>
+</bean>
+<bean id = "one" class = "com.spring.Person">
+<constructor-arg name = "username" value = "홍길동"></constructor-arg>
+<constructor-arg name = "age" value = "10"></constructor-arg>
+<constructor-arg name = "cat" ref="catBean"></constructor-arg>
+<constructor-arg name = "dog" ref="dogBean"></constructor-arg>
+
+<!-- <constructor-arg name = "cat" value = "pet01></constructor-arg> -->
+</bean>
+
+</beans>

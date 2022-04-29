@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+<bean id = "cat" class = "com.spring.Cat">
+<property name="catName" value = "나비"></property>
+<property name="catAge" value = "10"></property>
+</bean>
+<bean id = "catBean" class ="com.spring.Cat" p:catName = "야옹이" p:catAge="20"></bean>
+<bean id = "one" class ="com.spring.Person" p:username = "홍길동" p:age="20" p:cat-ref = "catBean"></bean>
+</beans>

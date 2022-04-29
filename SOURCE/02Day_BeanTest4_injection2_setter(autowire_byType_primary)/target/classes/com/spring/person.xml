@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	<!-- byType의 경우 같은 타입의 객체 생성문이 두개 이상 있으면 에러가 난다. -->
+	<bean id="xx" class="com.spring.Cat" primary="true">
+		<constructor-arg name="catName" value="야옹이"></constructor-arg>
+		<constructor-arg name="catAge" value="20"></constructor-arg>
+	</bean>
+
+	<bean id="xx2" class="com.spring.Cat">
+		<constructor-arg name="catName" value="나비"></constructor-arg>
+		<constructor-arg name="catAge" value="10"></constructor-arg>
+	</bean>
+
+	<bean id="xx3" class="com.spring.Cat">
+		<constructor-arg name="catName" value="뭉크"></constructor-arg>
+		<constructor-arg name="catAge" value="20"></constructor-arg>
+	</bean>
+
+	<bean id="onePerson" class="com.spring.Person" autowire="byType">
+		<property name="username" value="홍길동"></property>
+		<property name="age" value="20"></property>
+	</bean>
+
+
+
+</beans>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="order">
+
+	<select id="orderList" resultType="com.dto.OrderDTO">
+		select *
+		from t_order
+		order by num
+	</select>
+	<insert id="orderInsert" parameterType="com.dto.OrderDTO">
+		insert into t_order ( num, pcode, quantity )
+		values ( t_order_seq.nextval, #{pcode} , #{quantity} )
+	</insert>
+
+</mapper>

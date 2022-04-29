@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+<context:annotation-config></context:annotation-config><!-- 앞으로 어노테이션을 활용한다면 꼭 필요한 필수 태그입니다. -->
+<bean id = "pet01" class = "com.spring.Cat">
+<constructor-arg name="catName" value="야옹이"></constructor-arg>
+<constructor-arg name="catAge" value="10"></constructor-arg>
+</bean>
+<bean id = "pet02" class = "com.spring.Dog">
+<constructor-arg name="dogname" value="멍멍이"></constructor-arg>
+</bean>
+<bean id = "onePerson" class = "com.spring.Person"><!-- xml에 autowire가 삭제되고 클래스 멤버변수가 autowired로 자동주입된다. -->
+<property name="username" value = "홍길동"></property>
+<property name="age" value = "10"></property>
+<!-- <property name="cat" ref = "pet01"></property> -->
+</bean>
+</beans>

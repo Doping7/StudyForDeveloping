@@ -1,0 +1,18 @@
+<!-- https://mvnrepository.com/artifact/com.jslsolucoes/ojdbc6 -->
+<dependency>
+    <groupId>com.jslsolucoes</groupId>
+    <artifactId>ojdbc6</artifactId>
+    <version>11.2.0.1.0</version>
+</dependency>
+<!-- dependncy 추가 부분 -->
+
+<dependency>
+	<groupId>org.springframework</groupId>
+	<artifactId>spring-jdbc</artifactId>
+	<version>3.1.4.RELEASE</version>
+</dependency>
+<dependency>
+	<groupId>org.apache.commons</groupId>
+	<artifactId>commons-dbcp2</artifactId>
+	<version>2.1</version>
+</dependency>

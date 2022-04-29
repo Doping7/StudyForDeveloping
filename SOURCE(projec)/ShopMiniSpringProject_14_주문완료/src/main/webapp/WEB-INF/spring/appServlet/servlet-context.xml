@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd
+		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+
+
+	<mvc:annotation-driven></mvc:annotation-driven>
+	<mvc:default-servlet-handler />
+	<!-- <mvc:view-controller path="/" view-name="main" /> --><!-- maincontroller를 만들거라서 막아버림 요청 main.jsp -->
+	<mvc:view-controller path="/loginForm"
+		view-name="loginForm" />
+	<mvc:view-controller path="/memberForm"
+		view-name="memberForm" />
+	<mvc:view-controller path="/myPage"
+		view-name="myPage" />
+	<mvc:view-controller path="/cartList"
+		view-name="cartList" />
+	<mvc:view-controller path="/orderConfirm"
+		view-name="orderConfirm" />
+	<mvc:view-controller path="/orderDone"
+		view-name="orderDone" />
+
+	<bean id="loginCheckInterceptor"
+		class="com.interceptor.LoginCheckInterceptor"></bean>
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/loginCheck/**" />
+			<ref bean="loginCheckInterceptor" />
+		</mvc:interceptor>
+	</mvc:interceptors>
+	<!-- el, jstl dependency 추가 없이 사용없음 -->
+	<mvc:resources location="/WEB-INF/views/images/"
+		mapping="/images/**"></mvc:resources>
+	<mvc:resources location="/WEB-INF/views/css/"
+		mapping="/css/**"></mvc:resources>
+	<mvc:resources location="/WEB-INF/views/js/"
+		mapping="/js/**"></mvc:resources>
+	<bean
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/WEB-INF/views/"></property>
+		<property name="suffix" value=".jsp"></property>
+	</bean>
+	<context:component-scan base-package="com.*"></context:component-scan>
+</beans>

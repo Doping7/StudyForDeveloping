@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
+	<bean id="xxx" class="com.spring.Person">
+		<constructor-arg name="x" value="홍길동"></constructor-arg>
+	</bean>
+	<bean id="xxx2" class="com.spring.Person">
+		<constructor-arg name="x" value="유관순"></constructor-arg>
+		<constructor-arg name="y" value="이순신"></constructor-arg>
+	</bean>
+	<bean id="xxx3" class="com.spring.Person">
+		<constructor-arg name="xx" value="강감찬"></constructor-arg>
+		<constructor-arg name="yy" value="10"></constructor-arg>
+		<!-- 타입이 int여도 문자열로 넣어줘야한다. int로 변환은 알아서 해준다. -->
+	</bean>
+
+	<bean id="xxx4" class="com.spring.Person"></bean>
+	<!-- Person p1 = new Person("홍길동"); -->
+</beans>

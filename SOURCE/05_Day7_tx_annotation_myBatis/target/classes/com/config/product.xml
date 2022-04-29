@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
+<!-- 필수  context, tx check-->
+<!-- 0. 어노테이션 활성화-->
+<context:annotation-config></context:annotation-config>
+<!--1. properties등록  -->
+<context:property-placeholder location="classpath:com/config/db.properties"/>
+<!--  2. DataSource생성-->
+<bean id="myDataSource" class="org.apache.commons.dbcp2.BasicDataSource" destroy-method="close">
+	<property name="driverClassName" value="${driver}"></property>
+	<property name="url" value="${url}"></property>
+	<property name="username" value="${oracle.username}"></property>
+	<property name="password" value="${oracle.password}"></property>
+</bean>
+	<bean id="transactionManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="myDataSource"></property>
+	</bean>
+
+	<tx:annotation-driven transaction-manager="transactionManager"/>
+
+<bean id="mySqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean"> 
+	<property name="dataSource" ref="myDataSource"></property>
+	<property name="mapperLocations"><!--mapper설정 -->
+		<list>
+			<value>classpath:com/config/orderMapper.xml</value>
+			<value>classpath:com/config/productMapper.xml</value>
+		</list>
+	</property>
+	<property name="typeAliases">
+		<list>
+			<value>com.dto.OrderDTO</value>
+			<value>com.dto.ProductDTO</value><!-- dto클래스에서 alias명 지정 @Alias('alias명')  -->
+		</list>
+	</property>
+</bean>
+<bean id = "mySqlSessionTemplate" class = "org.mybatis.spring.SqlSessionTemplate">
+<constructor-arg name = "sqlSessionFactory" ref = "mySqlSessionFactory"></constructor-arg>
+</bean>
+<bean id = "dao" class = "com.dao.ProductDAO">
+<property name="session" ref="mySqlSessionTemplate"></property>
+</bean>
+
+<bean id = "service" class = "com.service.ProductService">
+<property name="dao" ref="dao"></property>
+</bean>
+</beans>
